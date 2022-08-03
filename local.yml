@@ -3,39 +3,50 @@
   tags: always
   become: true
   pre_tasks:
-    - name: pre-run | update package cache (arch)
-      tags: always
-      pacman: update_cache=yes
-      changed_when: False
-      when: ansible_distribution == "Archlinux"
+  - name: pre-run | update package cache
+    tags: always
+    apt: update_cache=yes
+    changed_when: False
+    when: ansible_distribution in ["Debian", "Ubuntu"]
 
-    - name: pre-run | update package cache (debian, etc)
-      tags: always
-      apt: update_cache=yes
-      changed_when: False
-      when: ansible_distribution in ["Debian", "Ubuntu"]
+  - name: pre-run | install ansible requirements
+    cmd: ansible-galaxy install -r requirements.yml
 
 # run roles
-- hosts: all
-  tags: base
-  become: true
-  roles:
-    - base
+- hosts: localhost
+  connection: local
+  tasks:
+  - name: set roles
+    set_fact:
+      roles: "{{ ansible_run_tags != ['all'] and ansible_run_tags or default_roles | difference(exclude_roles | default([])) }}"
+    tags: always
+
+  - name: run roles
+    include_role:
+      apply:
+        tags:
+        - "{{ roles_item }}"
+      name: "{{ roles_item }}"
+    loop_control:
+      loop_var: roles_item
+    with_items: "{{ roles }}"
+    tags:
+    - always
 
 # end of run cleanup and reporting
 - hosts: all
   become: true
   tasks:
-  - name: cleanup package cache (debian and ubuntu)
+  - name: cleanup package cache
     tags: always
     apt:
       autoclean: yes
     changed_when: false
-    when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    when: ansible_distribution in ["Debian", "Ubuntu"]
 
-  - name: autoremove orphan packages (debian and ubuntu)
+  - name: autoremove orphan packages
     tags: always
     apt:
       autoremove: yes
       purge: yes
-    when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    when: ansible_distribution in ["Debian", "Ubuntu"]
