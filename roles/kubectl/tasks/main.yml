@@ -6,7 +6,7 @@
   become: yes
 
 - name: config folder
-  ansible.buildin.file:
+  ansible.builtin.file:
     mode: 0755
     path: "{{ ansible_user_dir }}/.kube/conf.d"
     state: directory
