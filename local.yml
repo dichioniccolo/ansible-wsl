@@ -10,7 +10,8 @@
     when: ansible_distribution in ["Debian", "Ubuntu"]
 
   - name: pre-run | install ansible requirements
-    cmd: ansible-galaxy install -r requirements.yml
+    shell: >
+      ansible-galaxy install -r requirements.yml
 
 # run roles
 - hosts: localhost
