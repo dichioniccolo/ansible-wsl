@@ -1,5 +1,5 @@
 ---
-ansible_user_dir: niccolodichio
+ansible_user_dir: /home/niccolodichio
 
 git_branch: main
 git_name: "Niccolo Di Chio"
