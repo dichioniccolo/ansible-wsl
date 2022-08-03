@@ -11,11 +11,11 @@
     scope: global
     value: zebra
 
-- name: set fetch.prune
-  community.general.git_config:
-    name: fetch.prune
-    scope: global
-    value: true
+# - name: set fetch.prune
+#   community.general.git_config:
+#     name: fetch.prune
+#     scope: global
+#     value: true
 
 - name: set pull.rebase
   community.general.git_config:

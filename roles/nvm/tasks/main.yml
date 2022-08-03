@@ -1,6 +1,12 @@
 ---
+- name: download installer
+  get_url:
+    dest: /tmp/install-nvm.sh
+    mode: 0755
+    url: https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh
+
 - name: install
-  shell: >
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+  shell: /tmp/install-nvm.sh
+  become: yes
   args:
     creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
