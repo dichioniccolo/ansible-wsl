@@ -10,3 +10,8 @@
   become: yes
   args:
     creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+
+- name: remove install
+  file:
+    path: /tmp/install-nvm.sh
+    state: absent

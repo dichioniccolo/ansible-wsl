@@ -1,4 +1,6 @@
 ---
+ansible_user_dir: niccolodichio
+
 git_branch: main
 git_name: "Niccolo Di Chio"
 git_email: dichioniccolo@gmail.com

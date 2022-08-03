@@ -8,3 +8,8 @@
 - name: install
   shell: /tmp/install-doppler.sh
   become: yes
+
+- name: remove install
+  file:
+    path: /tmp/install-doppler.sh
+    state: absent
