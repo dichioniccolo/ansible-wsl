@@ -7,8 +7,9 @@ git_email: dichioniccolo@gmail.com
 
 default_roles:
   - zsh
-  - oh-my-zsh
   - git
   - nvm
   - kubectl
+  - helm
   - doppler-cli
+  - oh-my-zsh
