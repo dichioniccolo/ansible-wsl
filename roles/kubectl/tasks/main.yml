@@ -1,20 +1,24 @@
 ---
-- name: add an apt signing key for Kubernetes
-  apt_key:
-    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-    state: present
+- name: download kubectl
+  shell: >
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 
-- name: adding apt repository for Kubernetes
-  apt_repository:
-    repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
-    state: present
-    filename: kubernetes.list
-
-- name: install Kubernetes binaries
-  ansible.builtin.package:
-    name:
-    - kubectl
+- name: install kubectl
+  shell: >
+    install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
   become: yes
+
+# - name: adding apt repository for Kubernetes
+#   apt_repository:
+#     repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+#     state: present
+#     filename: kubernetes.list
+
+# - name: install Kubernetes binaries
+#   ansible.builtin.package:
+#     name:
+#     - kubectl
+#   become: yes
 
 - name: config folder
   ansible.builtin.file:
