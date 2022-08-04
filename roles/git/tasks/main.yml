@@ -40,10 +40,21 @@
     name: user.email
     scope: global
     value: "{{ git_email }}"
-  no_log: true
 
 - name: set user.name
   community.general.git_config:
     name: user.name
     scope: global
     value: "{{ git_name }}"
+
+- name: set credential.helper
+  community.general.git_config:
+    name: credential.helper
+    scope: global
+    value: "{{ git_credential_helper }}"
+
+- name: set credential.https://dev.azure.com.useHttpPath
+  community.general.git_config:
+    name: credential.https://dev.azure.com.useHttpPath
+    scope: global
+    value: true

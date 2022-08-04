@@ -1,0 +1,17 @@
+---
+- name: download installer
+  get_url:
+    dest: /tmp/install-fnm.sh
+    mode: 0755
+    url: https://fnm.vercel.app/install
+
+- name: install
+  shell: /tmp/install-fnm.sh
+  become: yes
+  args:
+    creates: "{{ ansible_env.HOME }}/.fnm/fnm.sh"
+
+- name: remove installer
+  file:
+    path: /tmp/install-fnm.sh
+    state: absent
