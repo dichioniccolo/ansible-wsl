@@ -1,0 +1,15 @@
+---
+- name: download installer
+  get_url:
+    dest: /tmp/install-firebase.sh
+    mode: 0755
+    url: https://firebase.tools
+
+- name: install
+  shell: /tmp/install-firebase.sh
+  become: yes
+
+- name: remove installer
+  file:
+    path: /tmp/install-firebase.sh
+    state: absent
