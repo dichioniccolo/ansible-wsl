@@ -1,7 +1,15 @@
 ---
-- name: Install
-  kewlfft.aur.aur:
-    use: yay
-    state: latest
-    name:
-      - pulumi
+- name: download installer
+  get_url:
+    dest: /tmp/install-pulumi.sh
+    mode: 0755
+    url: https://get.pulumi.com
+
+- name: install
+  shell: /tmp/install-pulumi.sh
+  become: yes
+
+- name: remove installer
+  file:
+    path: /tmp/install-pulumi.sh
+    state: absent

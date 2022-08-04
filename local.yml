@@ -11,7 +11,7 @@
 
   - name: pre-run | install ansible requirements
     shell: >
-      ansible-galaxy install -r requirements.yml
+      ansible-galaxy install -r ./requirements.yml
 
 # run roles
 - hosts: localhost

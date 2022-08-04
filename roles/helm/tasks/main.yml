@@ -1,7 +1,15 @@
 ---
-- name: Install
-  kewlfft.aur.aur:
-    use: yay
-    state: latest
-    name:
-      - helm
+- name: download installer
+  get_url:
+    dest: /tmp/install-helm.sh
+    mode: 0755
+    url: https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+
+- name: install
+  shell: /tmp/install-helm.sh
+  become: yes
+
+- name: remove installer
+  file:
+    path: /tmp/install-helm.sh
+    state: absent

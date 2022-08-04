@@ -11,5 +11,6 @@ default_roles:
   - nvm
   - kubectl
   - helm
+  - pulumi
   - doppler-cli
   - oh-my-zsh

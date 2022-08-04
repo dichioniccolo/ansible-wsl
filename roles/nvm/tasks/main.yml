@@ -11,7 +11,7 @@
   args:
     creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
 
-- name: remove install
+- name: remove installer
   file:
     path: /tmp/install-nvm.sh
     state: absent
