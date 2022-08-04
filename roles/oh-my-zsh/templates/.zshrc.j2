@@ -2,7 +2,7 @@
 echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
 
 # PATH
-export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/sbin:/home/niccolodichio/.fnm:$PATH"
 
 # OH-MY-ZSH
 export ZSH="$HOME/.oh-my-zsh"
@@ -16,18 +16,7 @@ source $ZSH/oh-my-zsh.sh
 # DEFAULTS
 export EDITOR='code --wait'
 
-# The next line sources a private environment file if it exists
-if [ -f "$HOME/.zsh_public" ]; then . "$HOME/.zsh_public"; fi
-if [ -f "$HOME/.zsh_private" ]; then . "$HOME/.zsh_private"; fi
-
-# TODO : cleanup scripting below
-
-# ITERM (MACOS ONLY)
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-test -e /usr/share/nvm/init-nvm.sh && source /usr/share/nvm/init-nvm.sh
-
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+eval "$(fnm env --use-on-cd)"
 
 alias nah="g reset --hard && g clean -df"
 alias log="g log --oneline --decorate --all --graph"
