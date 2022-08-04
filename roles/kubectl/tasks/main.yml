@@ -19,12 +19,12 @@
 - name: config folder
   ansible.builtin.file:
     mode: 0755
-    path: "/home/niccolodichio/.kube/conf.d"
+    path: "{{ ansible_user_dir }}/.kube/conf.d"
     state: directory
 
 - name: copy configs
   copy:
-    dest: "/home/niccolodichio/.kube/conf.d/{{ kubectl_config_item.key }}.conf"
+    dest: "{{ ansible_user_dir }}/.kube/conf.d/{{ kubectl_config_item.key }}.conf"
     content: "{{ kubectl_config_item.value }}"
     mode: 0600
   no_log: true
@@ -34,8 +34,8 @@
 
 - name: set active
   ansible.builtin.file:
-    dest: "/home/niccolodichio/.kube/config"
-    src: "/home/niccolodichio/.kube/conf.d/{{ kubectl_config_active }}.conf"
+    dest: "{{ ansible_user_dir }}/.kube/config"
+    src: "{{ ansible_user_dir }}/.kube/conf.d/{{ kubectl_config_active }}.conf"
     state: link
   no_log: true
   when: kubectl_config[kubectl_config_active] is defined
