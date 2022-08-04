@@ -1,7 +1,7 @@
 ---
 - name: existing install
   stat:
-    path: "{{ ansible_user_dir }}/.oh-my-zsh"
+    path: "/home/niccolodichio/.oh-my-zsh"
   register: install
 
 - name: download oh-my-zsh
@@ -22,14 +22,14 @@
 
 - name: copy .zshrc
   ansible.builtin.template:
-    dest: "{{ ansible_user_dir }}/.zshrc"
+    dest: "/home/niccolodichio/.zshrc"
     src: .zshrc.j2
 
 - name: clone zsh-autosuggestions
   ansible.builtin.git:
     clone: yes
     depth: 1
-    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    dest: "/home/niccolodichio/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
     repo: https://github.com/zsh-users/zsh-autosuggestions
     update: yes
     version: master
@@ -38,7 +38,7 @@
   ansible.builtin.git:
     clone: yes
     depth: 1
-    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/plugins/zsh-completions"
+    dest: "/home/niccolodichio/.oh-my-zsh/custom/plugins/zsh-completions"
     repo: https://github.com/zsh-users/zsh-completions
     update: yes
     version: master
@@ -47,7 +47,7 @@
   ansible.builtin.git:
     clone: yes
     depth: 1
-    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    dest: "/home/niccolodichio/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
     repo: https://github.com/zsh-users/zsh-syntax-highlighting
     update: yes
     version: master
