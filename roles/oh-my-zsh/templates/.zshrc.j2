@@ -26,7 +26,8 @@ if [ -f "$HOME/.zsh_private" ]; then . "$HOME/.zsh_private"; fi
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 test -e /usr/share/nvm/init-nvm.sh && source /usr/share/nvm/init-nvm.sh
 
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 alias nah="g reset --hard && g clean -df"
 alias log="g log --oneline --decorate --all --graph"
