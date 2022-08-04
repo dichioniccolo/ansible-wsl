@@ -9,9 +9,9 @@
     changed_when: False
     when: ansible_distribution in ["Debian", "Ubuntu"]
 
-  - name: pre-run | install ansible requirements
-    shell: >
-      ansible-galaxy install -r ./requirements.yml
+  # - name: pre-run | install ansible requirements
+  #   shell: >
+  #     ansible-galaxy install -r ./requirements.yml
 
 # run roles
 - hosts: localhost
