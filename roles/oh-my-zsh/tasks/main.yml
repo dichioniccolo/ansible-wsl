@@ -56,7 +56,7 @@
   ansible.builtin.git:
     clone: yes
     depth: 1
-    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/plugins/zsh-starship"
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/plugins/starship"
     repo: https://github.com/axieax/zsh-starship.git
     update: yes
     version: master
