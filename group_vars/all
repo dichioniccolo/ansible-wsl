@@ -16,3 +16,4 @@ default_roles:
   - firebase
   - doppler-cli
   - oh-my-zsh
+  - ansible-updater
