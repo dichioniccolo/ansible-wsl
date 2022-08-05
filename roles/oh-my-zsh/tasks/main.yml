@@ -51,3 +51,12 @@
     repo: https://github.com/zsh-users/zsh-syntax-highlighting
     update: yes
     version: master
+
+- name: clone zsh-starship
+  ansible.builtin.git:
+    clone: yes
+    depth: 1
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/plugins/zsh-starship"
+    repo: https://github.com/axieax/zsh-starship.git
+    update: yes
+    version: master

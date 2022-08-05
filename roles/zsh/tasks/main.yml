@@ -6,8 +6,23 @@
     state: latest
   become: yes
 
-- name: Set default
+- name: set default shell
   user:
     name: "{{ ansible_env['USER'] }}"
     shell: /usr/bin/zsh
   become: yes
+
+- name: download starship installer
+  get_url:
+    dest: /tmp/install-starship.sh
+    mode: 0755
+    url: https://starship.rs/install.sh
+
+- name: install starship
+  shell: /tmp/install-starship.sh
+  become: yes
+
+- name: remove starship installer
+  file:
+    path: /tmp/install-starship.sh
+    state: absent
