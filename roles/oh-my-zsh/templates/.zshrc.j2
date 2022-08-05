@@ -18,5 +18,28 @@ export EDITOR='code --wait'
 
 eval "$(fnm env --use-on-cd)"
 
-alias nah="g reset --hard && g clean -df"
-alias log="g log --oneline --decorate --all --graph"
+function mkcd() {
+  mkdir $1 && cd $1
+}
+
+# ----------------------
+# Aliases
+# ----------------------
+alias c="code ."
+
+# ----------------------
+# Git Aliases
+# ----------------------
+alias g="git"
+alias gs='echo ""; echo "*********************************************"; echo -e "   DO NOT FORGET TO PULL BEFORE COMMITTING"; echo "*********************************************"; echo ""; git status'
+alias gss='git status -s'
+alias gp="git push"
+alias gpll="git pull"
+alias gi="git init"
+alias gcm="git commit -m"
+alias gc="git commit"
+alias gaaa="git add -A"
+alias gaa="git add ."
+alias ga="git add"
+alias gl="git log --oneline --decorate --all --graph"
+alias nah="git reset --hard && g clean -df"
