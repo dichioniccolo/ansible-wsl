@@ -3,6 +3,7 @@
   user:
     name: autoprovisioner
     system: yes
+  become: yes
 
 - name: set up sudo for ansible user
   copy:
@@ -11,6 +12,7 @@
     owner: root
     group: root
     mode: 0440
+  become: yes
 
 - name: add ansible-pull cron job
   cron:
@@ -18,3 +20,4 @@
     user: autoprovisioner
     minute: "*/10"
     job: ansible-pull -o -U https://github.com/dichioniccolo/ansible-wsl.git
+  become: yes
